@@ -26,7 +26,7 @@ $subscriptionId = $azContext.Subscription.Id
 # The user to add role assignment for: Object id of a user 
 # (From Azure Active Directory, Users, someUser.objectId)
 # REPLACE THIS ONE WITH ONE FROM YOUR TENANT:
-$servicePrincipal = "74366248-e1f4-43a6-915f-bd33e36bbc43" 
+$servicePrincipal = "00000000-0000-0000-0000-000000000000" 
 
 $scope = "/subscriptions/$($subscriptionId)"
 $roleAssignmentID = (New-Guid).Guid
