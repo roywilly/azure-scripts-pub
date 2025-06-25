@@ -28,10 +28,9 @@ env:
   Subscription_ID: "4b9ec3e6-561c-4b1b-9496-7f33e46736b3" # S029-Omnia-Services-Standalone
 
 jobs:
-  Deploy-Data-Collection-Rules-DRYRUN:
-    name: Deploy Data Collection Rules DRYRUN
+  Deploy-DRYRUN:
+    name: Deploy DRYRUN
     runs-on: ubuntu-latest
-    environment: dummyEnv
 
     steps:
       - name: Checkout repository
@@ -43,9 +42,11 @@ jobs:
         if: ${{ github.event_name == 'schedule' }}
         run: gh-action/myDeploy.ps1 
         
-  Deploy-Data-Collection-Rules:
-    name: Deploy Data Collection Rules
+  Deploy-PROD:
+    name: Deploy
     runs-on: ubuntu-latest
+    needs: Deploy-DRYRUN
+    environment: dummyEnv
 
     steps:
       - name: Checkout repository
