@@ -52,4 +52,15 @@ jobs:
       - name: Deploy Data Collection Rules PROD
         id: DeployPROD
         run: gh-action/myDeploy.ps1 
-        
+
+  Deploy-PROD-Scheduled:
+    name: "Deploy to PROD on a schedule"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Deploy Data Collection Rules PROD
+        id: DeployPROD
+        run: gh-action/myDeploy.ps1 
+
