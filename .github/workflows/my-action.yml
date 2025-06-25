@@ -38,14 +38,6 @@ jobs:
       - name: Deploy Data Collection Rules DRYRUN
         if: ${{ github.event_name != 'schedule' }}
         run: gh-action/myDeploy.ps1 -dryrun
-      - name: Manual approval before PROD deployment
-        if: ${{ github.event_name != 'schedule' }}
-        uses: peter-evans/workflow-dispatch@v1
-        with:
-          workflow: deploy-datacollectionrules-prod.yml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          inputs:
-            dryrun: false
       - name: Deploy Data Collection Rules PROD
         if: ${{ github.event_name == 'schedule' }}
         run: gh-action/myDeploy.ps1 
