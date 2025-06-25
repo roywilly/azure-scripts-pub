@@ -31,30 +31,24 @@ jobs:
   Deploy-DRYRUN:
     name: Deploy DRYRUN
     runs-on: ubuntu-latest
-
+    if: ${{ github.event_name != 'schedule' }}
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Deploy Data Collection Rules DRYRUN
-        if: ${{ github.event_name != 'schedule' }}
+      - name: Deploy--DRYRUN
         run: gh-action/myDeploy.ps1 -dryrun
-      - name: Deploy Data Collection Rules PROD
-        if: ${{ github.event_name == 'schedule' }}
-        run: gh-action/myDeploy.ps1 
         
   Deploy-PROD:
-    name: Deploy
+    name: Deploy PROD
     runs-on: ubuntu-latest
     needs: Deploy-DRYRUN
     environment: dummyEnv
+    if: ${{ github.event_name == 'schedule' }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Deploy Data Collection Rules DRYRUN
-        if: ${{ github.event_name != 'schedule' }}
-        run: gh-action/myDeploy.ps1 -dryrun
       - name: Deploy Data Collection Rules PROD
-        if: ${{ github.event_name == 'schedule' }}
         run: gh-action/myDeploy.ps1 
         
