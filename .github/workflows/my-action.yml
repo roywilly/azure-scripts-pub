@@ -37,6 +37,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Deploy--DRYRUN
+        id: DeployDRYRUN
         run: gh-action/myDeploy.ps1 -dryrun
         
   Deploy-PROD:
@@ -49,5 +50,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Deploy Data Collection Rules PROD
+        id: DeployPROD
         run: gh-action/myDeploy.ps1 
         
