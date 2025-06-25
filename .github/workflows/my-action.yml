@@ -1,0 +1,52 @@
+name: deploy-datacollectionrules
+# This pipeline deploys Data Collection Rules (DCR) to solum managed subscription
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+          - "**"
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+  checks: write
+  repository-projects: read
+  deployments: read
+  actions: read
+
+defaults:
+  run:
+    shell: pwsh
+
+env:
+  Subscription_ID: "4b9ec3e6-561c-4b1b-9496-7f33e46736b3" # S029-Omnia-Services-Standalone
+
+jobs:
+  Deploy-Data-Collection-Rules:
+    name: Deploy Data Collection Rules
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Deploy Data Collection Rules DRYRUN
+        if: ${{ github.event_name != 'schedule' }}
+        run: gh-action/myDeploy.ps1 -dryrun
+      - name: Manual approval before PROD deployment
+        if: ${{ github.event_name != 'schedule' }}
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          workflow: deploy-datacollectionrules-prod.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          inputs:
+            dryrun: false
+      - name: Deploy Data Collection Rules PROD
+        if: ${{ github.event_name == 'schedule' }}
+        run: gh-action/myDeploy.ps1 
+        
