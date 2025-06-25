@@ -41,7 +41,7 @@ jobs:
         run: gh-action/myDeploy.ps1 -dryrun
         
   Deploy-PROD:
-    name: "CONFIRM DRYRUN"
+    name: "Deploy to PROD???"
     runs-on: ubuntu-latest
     needs: Deploy-DRYRUN
     environment: dummyEnv
