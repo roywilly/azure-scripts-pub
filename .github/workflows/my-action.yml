@@ -42,7 +42,6 @@ jobs:
         
   Deploy-DCR-prod-confirm:
     name: CONFIRM☑️ PROD Deployment
-    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     environment: dummyEnv
     needs: Deploy-DRYRUN
