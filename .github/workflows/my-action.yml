@@ -40,11 +40,20 @@ jobs:
         id: DeployDRYRUN
         run: gh-action/myDeploy.ps1 -dryrun
         
+  Deploy-DCR-prod-confirm:
+    name: CONFIRM☑️ PROD Deployment
+    if: ${{ github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    environment: dummyEnv
+    needs: Deploy-DRYRUN
+    steps:
+    - name: 'CONFIRM'
+      run: Write-output "Approved deployment to Omnia"
+      
   Deploy-PROD:
     name: "Deploy to PROD???"
     runs-on: ubuntu-latest
-    needs: Deploy-DRYRUN
-    environment: dummyEnv
+    needs: Deploy-DCR-prod-confirm
 
     steps:
       - name: Checkout repository
