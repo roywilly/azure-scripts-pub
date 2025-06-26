@@ -32,7 +32,6 @@ jobs:
     name: Deploy DRYRUN
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'schedule' }}
-    environment: dummyEnv
     
     steps:
       - name: Checkout repository
