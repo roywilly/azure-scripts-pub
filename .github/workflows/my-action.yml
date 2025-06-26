@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Deploy--DRYRUN
         id: DeployDRYRUN
-        run: gh-action/myDeploy.ps1 -dryrun
+        run: gh-action/myDeploy.ps1 -dryrun -tull
         
   Deploy-DCR-prod-confirm:
     name: CONFIRM☑️ PROD Deployment
