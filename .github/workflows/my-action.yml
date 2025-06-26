@@ -32,6 +32,7 @@ jobs:
     name: Deploy DRYRUN
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'schedule' }}
+    environment: dummyEnv
     
     steps:
       - name: Checkout repository
@@ -50,6 +51,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Deploy Data Collection Rules PROD
+        id: DeployPROD
         run: gh-action/myDeploy.ps1 
 
   Deploy-PROD-Scheduled:
