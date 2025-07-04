@@ -1,5 +1,5 @@
 param(
-    [switch]$DRYRUN = $false
+    [bool]$DRYRUN = $true
 )
 
 Write-Host "Starting deployment process..."
