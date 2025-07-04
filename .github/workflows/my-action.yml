@@ -31,7 +31,7 @@ jobs:
   Deploy-DRYRUN:
     name: Deploy DRYRUN
     runs-on: ubuntu-latest
-    if:  github.repository == 'roywilly/azure-scripts-pub' && ${{ github.event_name != 'schedule' }}
+    if:  ${{ github.repository == 'roywilly/azure-scripts-pub' && github.event_name != 'schedule' }}
     
     steps:
       - name: Checkout repository
@@ -65,7 +65,7 @@ jobs:
   Deploy-PROD-Scheduled:
     name: "Deploy to PROD on a schedule"
     runs-on: ubuntu-latest
-    if: github.repository == 'roywilly/azure-scripts-pub' && ${{ github.event_name == 'schedule' }}
+    if: ${{ github.repository == 'roywilly/azure-scripts-pub' &&  github.event_name == 'schedule' }}
 
     steps:
       - name: Checkout repository
